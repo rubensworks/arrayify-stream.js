@@ -1,6 +1,6 @@
 # Arrayify Stream
 
-[![npm version](https://badge.fury.io/js/arrayify-stream.svg)](https://www.npmjs.com/package/arrayify-stream)
+[![npm version](https://badge.fury.io/js/arrayify-stream.svg)](https://www.npmjs.com/package/arrayify-stream) [![Greenkeeper badge](https://badges.greenkeeper.io/rubensworks/arrayify-stream.js.svg)](https://greenkeeper.io/)
 
 Converts a Node readable stream into an array that is returned as a promise.
 
