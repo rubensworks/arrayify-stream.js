@@ -1,5 +1,7 @@
 # Arrayify Stream
 
+[![Build Status](https://travis-ci.com/rubensworks/arrayify-stream.js.svg?branch=master)](https://travis-ci.com/rubensworks/arrayify-stream.js)
+[![Coverage Status](https://coveralls.io/repos/github/rubensworks/arrayify-stream.js/badge.svg?branch=master)](https://coveralls.io/github/rubensworks/arrayify-stream.js?branch=master)
 [![npm version](https://badge.fury.io/js/arrayify-stream.svg)](https://www.npmjs.com/package/arrayify-stream)
 
 Converts a Node readable stream into an array that is returned as a promise.

@@ -36,6 +36,8 @@
     "test": "jest ${1}",
     "test-watch": "jest ${1} --watch",
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "validate": "npm ls"
+    "validate": "npm ls",
+    "build": "echo 'Not applicable'",
+    "lint": "echo 'Not applicable'"
   }
 }
