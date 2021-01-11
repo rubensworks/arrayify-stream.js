@@ -39,11 +39,21 @@ describe('arrayify-stream', () => {
     await expect(arrayifyStream(stream)).not.resolves;
   });
 
-  it('should reject when the stream emits an error', async() => {
+  it('should reject when the stream emits an error during reading', async() => {
     const stream = new Readable({ objectMode: true });
     stream._read = () => {
       stream.emit('error', new Error('Stream error'));
     };
     await expect(arrayifyStream(stream)).rejects.toThrow(new Error('Stream error'));
+  });
+
+  it('should reject when the stream emits an error immediately after calling', async() => {
+    const stream = new Readable({ objectMode: true });
+    stream._read = () => {
+      // Do nothing
+    };
+    const result = arrayifyStream(stream);
+    stream.emit('error', new Error('Stream error'));
+    await expect(result).rejects.toThrow(new Error('Stream error'));
   });
 });
