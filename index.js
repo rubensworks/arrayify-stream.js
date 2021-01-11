@@ -1,6 +1,6 @@
 module.exports = function(stream) {
   return new Promise(function(resolve, reject) {
-    var array = [];
+    const array = [];
     stream.on('data', function(data) {
       array.push(data);
     });
