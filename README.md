@@ -1,6 +1,6 @@
 # Arrayify Stream
 
-[![Build Status](https://travis-ci.com/rubensworks/arrayify-stream.js.svg?branch=master)](https://travis-ci.com/rubensworks/arrayify-stream.js)
+[![Build status](https://github.com/rubensworks/arrayify-stream.js/workflows/CI/badge.svg)](https://github.com/rubensworks/arrayify-stream.js/actions?query=workflow%3ACI)
 [![Coverage Status](https://coveralls.io/repos/github/rubensworks/arrayify-stream.js/badge.svg?branch=master)](https://coveralls.io/github/rubensworks/arrayify-stream.js?branch=master)
 [![npm version](https://badge.fury.io/js/arrayify-stream.svg)](https://www.npmjs.com/package/arrayify-stream)
 
