@@ -1,5 +1,5 @@
-const arrayifyStream = require('..');
-const Readable = require('stream').Readable;
+import arrayifyStream from '../index';
+import { Readable } from 'stream';
 
 describe('arrayify-stream', () => {
   it('should handle an empty stream', async() => {
@@ -36,6 +36,7 @@ describe('arrayify-stream', () => {
     stream._read = () => {
       // Do nothing
     };
+    // @ts-ignore
     await expect(arrayifyStream(stream)).not.resolves;
   });
 
