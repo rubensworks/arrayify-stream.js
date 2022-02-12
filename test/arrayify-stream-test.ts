@@ -1,5 +1,6 @@
 import arrayifyStream from '../index';
 import { Readable } from 'stream';
+import { fromArray } from 'asynciterator';
 
 describe('arrayify-stream', () => {
   it('should handle an empty stream', async() => {
@@ -12,7 +13,7 @@ describe('arrayify-stream', () => {
     const stream = new Readable({ objectMode: true });
     stream.push('a');
     stream.push(null);
-    expect(await arrayifyStream(stream)).toEqual([ 'a' ]);
+    expect(await arrayifyStream<string>(stream)).toEqual<string[]>([ 'a' ]);
   });
 
   it('should handle a stream with three elements', async() => {
@@ -56,5 +57,10 @@ describe('arrayify-stream', () => {
     const result = arrayifyStream(stream);
     stream.emit('error', new Error('Stream error'));
     await expect(result).rejects.toThrow(new Error('Stream error'));
+  });
+
+  it('should run on more exotic event emitters', async() => {
+    await expect(arrayifyStream(fromArray([1, 2, 3]))).resolves.toEqual([1, 2, 3]);
+    await expect(arrayifyStream<number>(fromArray([1, 2, 3]))).resolves.toEqual([1, 2, 3]);
   });
 });
