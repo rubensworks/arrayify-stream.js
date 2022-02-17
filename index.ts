@@ -1,18 +1,13 @@
-interface IEventEmitter<T = any> {
-  on(event: 'data', listener: (...args: [T, ...any[]]) => void): this;
-  on(event: string | symbol, listener: (...args: any[]) => void): this;
-}
+import type { EventEmitter } from 'events'
 
-export function promisifyEventEmitter(event: IEventEmitter): Promise<undefined>;
-export function promisifyEventEmitter<T>(event: IEventEmitter, result: T): Promise<T>;
-export function promisifyEventEmitter<T>(event: IEventEmitter, result?: T | undefined): Promise<T | undefined> {
-  return new Promise<T | undefined>((resolve, reject) => {
+function promisifyEventEmitter<T>(event: EventEmitter, result: T): Promise<T> {
+  return new Promise<T>((resolve, reject) => {
     event.on('end', () => resolve(result));
     event.on('error', reject);
   })
 }
 
-export default function arrayifyStream<T = any>(stream: IEventEmitter<T>): Promise<T[]> {
+export default function arrayifyStream<T = any>(stream: EventEmitter): Promise<T[]> {
   const array: T[] = [];
   return promisifyEventEmitter(stream.on('data', data => array.push(data)), array);
 }
