@@ -1,6 +1,6 @@
-import arrayifyStream from '../index';
 import { Readable } from 'stream';
 import { fromArray } from 'asynciterator';
+import arrayifyStream from '..';
 
 describe('arrayify-stream', () => {
   it('should handle an empty stream', async() => {
@@ -25,7 +25,7 @@ describe('arrayify-stream', () => {
     expect(await arrayifyStream(stream)).toEqual([ 'a', 'b', 'c' ]);
   });
 
-  it('should handle a stream with one element', async() => {
+  it('should handle a stream with one element (no typing)', async() => {
     const stream = new Readable({ objectMode: true });
     stream.push('a');
     stream.push(null);
@@ -37,7 +37,7 @@ describe('arrayify-stream', () => {
     stream._read = () => {
       // Do nothing
     };
-    // @ts-ignore
+    // @ts-expect-error
     await expect(arrayifyStream(stream)).not.resolves;
   });
 
@@ -60,7 +60,7 @@ describe('arrayify-stream', () => {
   });
 
   it('should run on more exotic event emitters', async() => {
-    await expect(arrayifyStream(fromArray([1, 2, 3]))).resolves.toEqual([1, 2, 3]);
-    await expect(arrayifyStream<number>(fromArray([1, 2, 3]))).resolves.toEqual([1, 2, 3]);
+    await expect(arrayifyStream(fromArray([ 1, 2, 3 ]))).resolves.toEqual([ 1, 2, 3 ]);
+    await expect(arrayifyStream<number>(fromArray([ 1, 2, 3 ]))).resolves.toEqual([ 1, 2, 3 ]);
   });
 });
