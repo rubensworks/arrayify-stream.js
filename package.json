@@ -64,6 +64,7 @@
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "validate": "npm ls",
     "lint": "eslint index.ts test/**.ts ",
-    "build": "tsc"
+    "build": "tsc",
+    "prepare": "npm run build"
   }
 }
