@@ -7,7 +7,7 @@ function promisifyEventEmitter<T>(event: EventEmitter, result: T): Promise<T> {
   });
 }
 
-export default function arrayifyStream<T = any>(stream: EventEmitter): Promise<T[]> {
+export function arrayifyStream<T = any>(stream: EventEmitter): Promise<T[]> {
   const array: T[] = [];
   return promisifyEventEmitter(stream.on('data', data => array.push(data)), array);
 }
