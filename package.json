@@ -34,7 +34,10 @@
   "files": [
     "index.d.ts",
     "index.js",
-    "index.js.map"
+    "index.js.map",
+    "esm/index.d.ts",
+    "esm/index.js",
+    "esm/index.js.map"
   ],
   "pre-commit": [
     "build",
