@@ -11,7 +11,7 @@ This is a very simple zero-dependency implementation.
 ## Usage
 
 ```javascript
-const arrayifyStream = require('arrayify-stream');
+import { arrayifyStream } from 'arrayify-stream';
 ...
 let myArray = await arrayifyStream(myStream);
 ```
