@@ -8,7 +8,22 @@
     "readable stream"
   ],
   "main": "index.js",
+  "module": "esm/index.js",
+  "types": "index.d.ts",
   "typings": "index",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      },
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      }
+    }
+  },
   "repository": "git@github.com:rubensworks/arrayify-stream.js.git",
   "author": "Ruben Taelman <rubensworks@gmail.com>",
   "bugs": {
@@ -19,7 +34,10 @@
   "files": [
     "index.d.ts",
     "index.js",
-    "index.js.map"
+    "index.js.map",
+    "esm/index.d.ts",
+    "esm/index.js",
+    "esm/index.js.map"
   ],
   "pre-commit": [
     "build",
@@ -76,7 +94,9 @@
     "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "validate": "npm ls",
     "lint": "eslint index.ts test/**.ts ",
-    "build": "tsc",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc -d --module es2015 --moduleResolution nodenext --outDir esm",
     "prepare": "npm run build",
     "version": "manual-git-changelog onversion"
   }

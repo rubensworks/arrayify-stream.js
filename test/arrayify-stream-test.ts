@@ -1,6 +1,6 @@
 import { Readable } from 'stream';
 import { fromArray } from 'asynciterator';
-import arrayifyStream from '..';
+import { arrayifyStream } from '..';
 
 describe('arrayify-stream', () => {
   it('should handle an empty stream', async() => {
