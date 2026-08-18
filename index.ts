@@ -1,4 +1,4 @@
-import type { EventEmitter } from 'events';
+import type { EventEmitter } from 'node:events';
 
 function promisifyEventEmitter<T>(event: EventEmitter, result: T): Promise<T> {
   return new Promise<T>((resolve, reject) => {
@@ -9,5 +9,5 @@ function promisifyEventEmitter<T>(event: EventEmitter, result: T): Promise<T> {
 
 export function arrayifyStream<T = any>(stream: EventEmitter): Promise<T[]> {
   const array: T[] = [];
-  return promisifyEventEmitter(stream.on('data', data => array.push(data)), array);
+  return promisifyEventEmitter(stream.on('data', (data: T) => array.push(data)), array);
 }

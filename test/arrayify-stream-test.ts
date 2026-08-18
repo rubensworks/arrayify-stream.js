@@ -1,4 +1,4 @@
-import { Readable } from 'stream';
+import { Readable } from 'node:stream';
 import { fromArray } from 'asynciterator';
 import { arrayifyStream } from '..';
 
@@ -6,14 +6,14 @@ describe('arrayify-stream', () => {
   it('should handle an empty stream', async() => {
     const stream = new Readable();
     stream.push(null);
-    expect(await arrayifyStream(stream)).toEqual([]);
+    await expect(arrayifyStream(stream)).resolves.toEqual([]);
   });
 
   it('should handle a stream with one element', async() => {
     const stream = new Readable({ objectMode: true });
     stream.push('a');
     stream.push(null);
-    expect(await arrayifyStream<string>(stream)).toEqual<string[]>([ 'a' ]);
+    await expect(arrayifyStream<string>(stream)).resolves.toEqual<string[]>([ 'a' ]);
   });
 
   it('should handle a stream with three elements', async() => {
@@ -22,14 +22,14 @@ describe('arrayify-stream', () => {
     stream.push('b');
     stream.push('c');
     stream.push(null);
-    expect(await arrayifyStream(stream)).toEqual([ 'a', 'b', 'c' ]);
+    await expect(arrayifyStream(stream)).resolves.toEqual([ 'a', 'b', 'c' ]);
   });
 
   it('should handle a stream with one element (no typing)', async() => {
     const stream = new Readable({ objectMode: true });
     stream.push('a');
     stream.push(null);
-    expect(await arrayifyStream(stream)).toEqual([ 'a' ]);
+    await expect(arrayifyStream(stream)).resolves.toEqual([ 'a' ]);
   });
 
   it('should not resolve on an open stream', async() => {
@@ -38,7 +38,7 @@ describe('arrayify-stream', () => {
       // Do nothing
     };
     // @ts-expect-error
-    await expect(arrayifyStream(stream)).not.resolves;
+    await expect(arrayifyStream(stream)).not.resolves; // eslint-disable-line jest/valid-expect
   });
 
   it('should reject when the stream emits an error during reading', async() => {
