@@ -51,7 +51,7 @@
     "lint": "eslint . --cache",
     "build": "npm run build:cjs && npm run build:esm",
     "build:cjs": "tsc",
-    "build:esm": "tsc -d --module es2015 --moduleResolution nodenext --outDir esm",
+    "build:esm": "tsc -d --module es2015 --moduleResolution node --outDir esm",
     "prepare": "npm run build",
     "version": "manual-git-changelog onversion"
   },
@@ -64,17 +64,17 @@
     "jest": "^30.0.0",
     "manual-git-changelog": "^1.0.0",
     "pre-commit": "^2.0.0",
-    "ts-jest": "^29.0.0",
-    "typescript": "^5.0.0"
+    "ts-jest": "^29.4.0",
+    "typescript": "^5.4.0"
   },
   "jest": {
-    "globals": {
-      "ts-jest": {
-        "tsconfig": "test/tsconfig.json"
-      }
-    },
     "transform": {
-      "^.+\\.ts$": "ts-jest"
+      "^.+\\.ts$": [
+        "ts-jest",
+        {
+          "tsconfig": "test/tsconfig.json"
+        }
+      ]
     },
     "transformIgnorePatterns": [
       "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
