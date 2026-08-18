@@ -2,66 +2,65 @@
   "name": "arrayify-stream",
   "version": "3.0.0",
   "description": "Converts a Node readable stream into an array",
+  "author": "Ruben Taelman <rubensworks@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://github.com/rubensworks/arrayify-stream.js#readme",
+  "repository": "git@github.com:rubensworks/arrayify-stream.js.git",
+  "bugs": {
+    "url": "https://github.com/rubensworks/arrayify-stream.js/issues"
+  },
   "keywords": [
     "stream",
     "array",
     "readable stream"
   ],
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./esm/index.d.ts",
+        "default": "./esm/index.js"
+      },
+      "require": {
+        "types": "./index.d.ts",
+        "default": "./index.js"
+      }
+    }
+  },
   "main": "index.js",
   "module": "esm/index.js",
   "types": "index.d.ts",
   "typings": "index",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "require": {
-        "types": "./index.d.ts",
-        "default": "./index.js"
-      },
-      "import": {
-        "types": "./esm/index.d.ts",
-        "default": "./esm/index.js"
-      }
-    }
-  },
-  "repository": "git@github.com:rubensworks/arrayify-stream.js.git",
-  "author": "Ruben Taelman <rubensworks@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/rubensworks/arrayify-stream.js/issues"
-  },
-  "homepage": "https://github.com/rubensworks/arrayify-stream.js#readme",
-  "license": "MIT",
   "files": [
-    "index.d.ts",
-    "index.js",
-    "index.js.map",
     "esm/index.d.ts",
     "esm/index.js",
-    "esm/index.js.map"
+    "esm/index.js.map",
+    "index.d.ts",
+    "index.js",
+    "index.js.map"
   ],
   "pre-commit": [
     "build",
     "test"
   ],
+  "scripts": {
+    "test": "jest ${1}",
+    "test-watch": "jest ${1} --watch",
+    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "validate": "npm ls",
+    "lint": "eslint . --cache",
+    "build": "npm run build:cjs && npm run build:esm",
+    "build:cjs": "tsc",
+    "build:esm": "tsc -d --module es2015 --moduleResolution nodenext --outDir esm",
+    "prepare": "npm run build",
+    "version": "manual-git-changelog onversion"
+  },
   "devDependencies": {
+    "@rubensworks/eslint-config": "^3.1.0",
     "@types/jest": "^29.0.0",
-    "@typescript-eslint/eslint-plugin": "^5.12.0",
-    "@typescript-eslint/parser": "^5.12.0",
     "asynciterator": "^3.2.1",
     "coveralls": "^3.0.0",
-    "eslint": "^8.9.0",
-    "eslint-config-es": "^4.0.0",
-    "eslint-import-resolver-typescript": "^2.5.0",
-    "eslint-plugin-eslint-comments": "^3.2.0",
-    "eslint-plugin-extended": "^0.2.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jest": "^26.1.1",
-    "eslint-plugin-mocha": "^10.0.3",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "eslint-plugin-tsdoc": "^0.2.14",
-    "eslint-plugin-unicorn": "37.0.1",
-    "eslint-plugin-unused-imports": "^2.0.0",
+    "eslint": "^8.56.0",
     "jest": "^29.0.0",
     "manual-git-changelog": "^1.0.0",
     "pre-commit": "^2.0.0",
@@ -87,17 +86,5 @@
     ],
     "collectCoverage": true,
     "testEnvironment": "node"
-  },
-  "scripts": {
-    "test": "jest ${1}",
-    "test-watch": "jest ${1} --watch",
-    "coveralls": "jest --coverage && cat ./coverage/lcov.info | coveralls",
-    "validate": "npm ls",
-    "lint": "eslint index.ts test/**.ts ",
-    "build": "npm run build:cjs && npm run build:esm",
-    "build:cjs": "tsc",
-    "build:esm": "tsc -d --module es2015 --moduleResolution nodenext --outDir esm",
-    "prepare": "npm run build",
-    "version": "manual-git-changelog onversion"
   }
 }

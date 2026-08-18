@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "noImplicitAny": false,
     "lib": [
       "es6"
-    ]
+    ],
+    "module": "commonjs",
+    "noImplicitAny": false
   }
 }
